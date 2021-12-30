@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+    mongodb:
+        container_name: mongodb
+        image: mongo:latest
+        volumes:
+            - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+            - mongodb.data:/data/db
+        ports:
+            - 127.0.0.1:${MONGODB_PORT}:27017
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+            MONGODB_USERNAME: ${MONGODB_USERNAME}
+            MONGODB_PASSWORD: ${MONGODB_PASSWORD}
+            MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+        networks:
+            - global
+
+volumes:
+    mongodb.data:
+
+networks:
+    global:
+        external: true
