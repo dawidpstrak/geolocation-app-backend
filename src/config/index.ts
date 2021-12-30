@@ -16,7 +16,7 @@ export default () => ({
     mongodb: {
         uri: `${env('MONGODB_URI_PREFIX')}://${env('MONGODB_USERNAME')}:${env('MONGODB_PASSWORD')}@${env(
             'MONGODB_HOST'
-        )}:${env('MONGODB_PORT', '')}/${env('MONGO_INITDB_DATABASE')}`
+        )}${env('MONGODB_PORT') ? ':' : '' + env('MONGODB_PORT', '')}/${env('MONGO_INITDB_DATABASE')}`
     },
     ipStack: {
         baseURL: env('IPSTACK_API_BASE_URL'),
