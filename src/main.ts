@@ -10,24 +10,22 @@ async function bootstrap() {
     app.setGlobalPrefix('api');
     app.useGlobalPipes(new ValidationPipe({ transform: true, transformOptions: { enableImplicitConversion: true } }));
 
-    const env = app.get(ConfigService).get('app.env');
+    const swaggerDocumentConfig = new DocumentBuilder()
+        .addBearerAuth()
+        .setTitle('Geolocation API')
+        .setDescription('API for geolocation CRUD operations with basic authorization and authentication')
+        .setVersion('1.0')
+        .addTag('auth')
+        .addTag('geolocations')
+        .build();
 
-    if (env === 'development') {
-        const swaggerDocumentConfig = new DocumentBuilder()
-            .addBearerAuth()
-            .setTitle('Geolocation API')
-            .setDescription('API for geolocation CRUD operations with basic authorization and authentication')
-            .setVersion('1.0')
-            .addTag('auth')
-            .addTag('geolocations')
-            .build();
+    const swaggerDocument = SwaggerModule.createDocument(app, swaggerDocumentConfig);
 
-        const swaggerDocument = SwaggerModule.createDocument(app, swaggerDocumentConfig);
+    SwaggerModule.setup('api/docs', app, swaggerDocument);
 
-        SwaggerModule.setup('api/docs', app, swaggerDocument);
-    }
+    const { port } = app.get(ConfigService).get('app');
 
-    await app.listen(3000);
+    await app.listen(port);
 }
 
 bootstrap();

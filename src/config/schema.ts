@@ -6,8 +6,13 @@ export const configValidationSchema = Joi.object({
     JWT_SECRET: Joi.string().required(),
     JWT_EXPIRATION_TIME_IN_MINUTES: Joi.string().required(),
 
-    MONGODB_PORT: Joi.number().required(),
+    MONGODB_PORT: Joi.number().when('NODE_ENV', {
+        is: 'development',
+        then: Joi.required(),
+        otherwise: Joi.optional()
+    }),
     MONGODB_HOST: Joi.string().required(),
+    MONGODB_URI_PREFIX: Joi.string().required(),
     MONGO_INITDB_ROOT_USERNAME: Joi.string().required(),
     MONGO_INITDB_ROOT_PASSWORD: Joi.string().required(),
     MONGODB_USERNAME: Joi.string().required(),
