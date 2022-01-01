@@ -1,8 +1,8 @@
 ## Host
 
-API is hosted on heroku [https://sofomo-task-dawid.herokuapp.com/](https://sofomo-task-dawid.herokuapp.com/)
+API is hosted on heroku [https://sofomo-task-dawid-backend.herokuapp.com/](https://sofomo-task-dawid-backend.herokuapp.com/)
 
-For documentation please visit link [https://sofomo-task-dawid.herokuapp.com/api/docs](https://sofomo-task-dawid.herokuapp.com/api/docs)
+For documentation please visit link [https://sofomo-task-dawid-backend.herokuapp.com/api/docs](https://sofomo-task-dawid-backend.herokuapp.com/api/docs)
 
 ## Description
 
