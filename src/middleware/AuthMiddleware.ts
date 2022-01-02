@@ -1,4 +1,4 @@
-import { Injectable, NestMiddleware, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException, Injectable, NestMiddleware } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
@@ -16,7 +16,7 @@ export class AuthMiddleware implements NestMiddleware {
 
             verify(token, JWTSecret, (err, payload) => {
                 if (err) {
-                    throw new UnauthorizedException();
+                    throw new ForbiddenException();
                 }
                 const { loggedUser } = payload;
 
@@ -25,7 +25,7 @@ export class AuthMiddleware implements NestMiddleware {
                 next();
             });
         } else {
-            throw new UnauthorizedException();
+            throw new ForbiddenException();
         }
     }
 }
