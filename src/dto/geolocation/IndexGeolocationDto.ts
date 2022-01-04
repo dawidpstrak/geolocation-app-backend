@@ -9,4 +9,13 @@ export class IndexGeolocationDto {
 
     @ApiProperty({ required: false })
     limit?: number;
+
+    @ApiProperty({ required: false })
+    order?: string;
+
+    @ApiProperty({ required: false })
+    sort?: string;
+
+    @ApiProperty({ required: false })
+    searchTerm?: string;
 }
